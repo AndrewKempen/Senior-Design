@@ -46,8 +46,8 @@
         }
 
         .button {
-            padding: 15px 50px;
-            font-size: 24px;
+            padding: 40px 15px;
+            font-size: 35px;
             text-align: center;
             outline: none;
             color: #fff;
@@ -90,10 +90,9 @@
             <!-- <h2>Output - GPIO 2</h2>
             <p class="state">state: <span id="state">%STATE%</span></p> -->
             <input type="text" id="speed" name="speed" value="100">
-            <p><button id="leftForwardButton" class="button">FWD</button><button id="rightForwardButton"
-                    class="button">FWD</button></p>
-            <p><button id="leftReverseButton" class="button">REV</button><button id="rightReverseButton"
-                    class="button">REV</button></p>
+            <p><button id="ForwardButton" class="button">FORWARD</button></p>
+            <p><button id="leftButton" class="button">LEFT &nbsp</button>&nbsp &nbsp<button id="rightButton"class="button">RIGHT</button></p>
+            <p><button id="ReverseButton"class="button">REVERSE</button></p>
         </div>
     </div>
     <script>
@@ -130,17 +129,27 @@
             initButton();
         }
         function initButton() {
-            document.getElementById('leftForwardButton').addEventListener('pointerdown', () => { handleEvent(1, 1); });
-            document.getElementById('leftForwardButton').addEventListener('pointerup', () => { handleEvent(1, 0);});
+//Forward
+            document.getElementById('ForwardButton').addEventListener('pointerdown', () => { handleEvent(1, 1); });//Left Forward
+            document.getElementById('ForwardButton').addEventListener('pointerup', () => { handleEvent(1, 0);});
+            document.getElementById('ForwardButton').addEventListener('pointerdown', () => { handleEvent(2, 1);});//Right Forward
+            document.getElementById('ForwardButton').addEventListener('pointerup',() => { handleEvent(2, 0);});
+//Left Turn
+            document.getElementById('leftButton').addEventListener('pointerdown', () => { handleEvent(1, -1);});//Left Reverse
+            document.getElementById('leftButton').addEventListener('pointerup', () => { handleEvent(1, 0);});
+            document.getElementById('leftButton').addEventListener('pointerdown', () => { handleEvent(2, 1);});//Right Forward
+            document.getElementById('leftButton').addEventListener('pointerup',() => { handleEvent(2, 0);});
+//Right Turn
 
-            document.getElementById('leftReverseButton').addEventListener('pointerdown', () => { handleEvent(1, -1);});
-            document.getElementById('leftReverseButton').addEventListener('pointerup', () => { handleEvent(1, 0);});
-
-            document.getElementById('rightForwardButton').addEventListener('pointerdown', () => { handleEvent(2, 1);});
-            document.getElementById('rightForwardButton').addEventListener('pointerup',() => { handleEvent(2, 0);});
-
-            document.getElementById('rightReverseButton').addEventListener('pointerdown', () => { handleEvent(2, -1);});
-            document.getElementById('rightReverseButton').addEventListener('pointerup', () => { handleEvent(2, 0);});
+ 	    document.getElementById('rightButton').addEventListener('pointerdown', () => { handleEvent(1, 1); });//left forward
+            document.getElementById('rightButton').addEventListener('pointerup', () => { handleEvent(1, 0);});
+            document.getElementById('rightButton').addEventListener('pointerdown', () => { handleEvent(2, -1);});//Right Reverse
+            document.getElementById('rightButton').addEventListener('pointerup', () => { handleEvent(2, 0);});
+//Reverse
+            document.getElementById('ReverseButton').addEventListener('pointerdown', () => { handleEvent(2, -1);});//Right Reverse
+            document.getElementById('ReverseButton').addEventListener('pointerup', () => { handleEvent(2, 0);});
+            document.getElementById('ReverseButton').addEventListener('pointerdown', () => { handleEvent(1, -1);});//Left Reverse
+            document.getElementById('ReverseButton').addEventListener('pointerup', () => { handleEvent(1, 0);});
         }
         function handleEvent(motor, power) {
             var text;
